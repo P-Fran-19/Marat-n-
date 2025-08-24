@@ -1,0 +1,18 @@
+/*cuerpo*/
+body {
+    cursor: url('/imagenes/esta.png') 10 10, auto; /*Elegir foto para el cursor*/
+    height: 100vh;
+}
+/*barra de scroll*/
+::-webkit-scrollbar {
+    width: 18px;
+}
+::-webkit-scrollbar-track {
+    background: #5e0257;
+}
+::-webkit-scrollbar-thumb {
+    background: #fffeff;
+    border-radius: 12px;
+    border: 3px solid #5e0257;
+}
+

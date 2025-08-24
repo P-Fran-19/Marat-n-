@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago de entradas</title>
+    <link href="/css/disenoPago.css" rel="stylesheet">
+    <link href="/css/global.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Lado izquierdo -->
+        <div class="left">
+            <h1>Compra de entradas</h1>
+            <!-- Información de pago -->
+            <div id="infoPago" class="info-pago" style="display:none;">
+                <h3>Datos para la transferencia</h3>
+                <p><strong>Alias:</strong> marathon.obra</p>
+                <p><strong>CBU:</strong> 0000076500000022097929</p>
+                <p><strong>CUIT:</strong> 20444840243</p>
+                <p><strong>Nombre:</strong> Lisandro Itzcovich</p>
+                <p><strong>Banco:</strong> Personal Pay</p>
+
+                <h3>Pasos a seguir:</h3>
+                <ol>
+                    <li>Transferir el monto que figura en total de compra.</li>
+                    <li>Enviar el comprobante a nuestro contacto.<br>
+                        Mail: <a href="mailto:marathon.prensa@gmail.com">marathon.prensa@gmail.com</a><br>
+                        WhatsApp: <a href="https://wa.me/1139509939" target="_blank">+1139509939</a>
+                    </li>
+                    <li>Luego te confirmaremos la correcta recepción de la transferencia.</li>
+                    <li>Serás anotado en una lista para la entrada de la fiesta.</li>
+                </ol>
+            </div>
+        </div>
+        
+
+
+        <!-- Lado derecho -->
+        <div class="right">
+            <form>
+                <label>Nombre:</label>
+                <input type="text" id="nombre" placeholder="(obligatorio)">
+
+                <label>Apellido:</label>
+                <input type="text" id="apellido" placeholder="(obligatorio)">
+
+                <label>Fecha de nacimiento:</label>
+                <input type="date" id="fechaNacimiento">
+
+                <label>Email:</label>
+                <input type="email" id="email" placeholder="(obligatorio)">
+
+                <label>Cantidad:</label>
+                <select id="opciones"></select>
+
+                <label>Disponibilidad:</label>
+                <meter value="30" min="0" max="120"></meter>
+
+                <p id="total"></p>
+                <button id="confirmar" type="button">Confirmar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="walletBrick_container"></div>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="/js/metodoPago.js" defer></script>
+    <script src="/js/server.js"></script>
+</body>
+</html>
+
+
