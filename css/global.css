@@ -1,6 +1,6 @@
 /*cuerpo*/
 body {
-    cursor: url('/imagenes/esta.png') 10 10, auto; /*Elegir foto para el cursor*/
+    cursor: url('../imagenes/esta.png') 10 10, auto; /*Elegir foto para el cursor*/
     height: 100vh;
 }
 /*barra de scroll*/

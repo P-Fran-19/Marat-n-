@@ -1,9 +1,9 @@
-<?php // http://localhost/proyecto/login.php
+<?php //http://localhost/BaseDeDatosWeb/php/login.php
 session_start();
 
 // Usuario y contraseña hardcodeados 
 $usuario_correcto = 'mili';
-$contraseña_correcta = '1234';
+$contraseña_correcta = 'EsLamejorActrizDeTodosLosTiempos';
 
 // traigo lo que escribieron
 if ($_SERVER ["REQUEST_METHOD"] == "POST") {
@@ -32,7 +32,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST") {
     <?php if(isset($error)) echo "<p style='color:red'>$error</p>"; ?>
     <form method="post">
         Usuario: <input type="text" name="usuario" required><br>
-        Contraseña: <input type="password" name="clave" required><br>
+        Contraseña: <input type="password" name="contraseña" required><br>
         <button type="submit">Ingresar</button>
     </form>
 </body>

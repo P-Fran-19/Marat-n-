@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pago de entradas</title>
-    <link href="/css/disenoPago.css" rel="stylesheet">
-    <link href="/css/global.css" rel="stylesheet">
+    <link href="./css/disenoPago.css" rel="stylesheet">
+    <link href="./css/global.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -33,40 +33,38 @@
                 </ol>
             </div>
         </div>
-        
-
-
         <!-- Lado derecho -->
         <div class="right">
-            <form>
+            <form action="./php/guardar.php" method="POST">
                 <label>Nombre:</label>
-                <input type="text" id="nombre" placeholder="(obligatorio)">
+                <input type="text" id="nombre" name="nombre" placeholder="(obligatorio)">
 
                 <label>Apellido:</label>
-                <input type="text" id="apellido" placeholder="(obligatorio)">
+                <input type="text" id="apellido" name="apellido" placeholder="(obligatorio)">
 
                 <label>Fecha de nacimiento:</label>
-                <input type="date" id="fechaNacimiento">
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento">
 
                 <label>Email:</label>
-                <input type="email" id="email" placeholder="(obligatorio)">
+                <input type="email" id="email" name="email" placeholder="(obligatorio)">
 
                 <label>Cantidad:</label>
-                <select id="opciones"></select>
+                <select id="opciones" name="cantidad"></select>
 
                 <label>Disponibilidad:</label>
-                <meter value="30" min="0" max="120"></meter>
+                <meter id="disponibilidad" value="0" min="0" max="120"></meter>
+                <span id="textoDisponibles"></span>
+
 
                 <p id="total"></p>
-                <button id="confirmar" type="button">Confirmar</button>
+                <button id="confirmar" type="submit">Confirmar</button>
+                <!-- que sea type="submit, no "button. para poder mandar -->
             </form>
         </div>
     </div>
 
     <div id="walletBrick_container"></div>
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <script src="/js/metodoPago.js" defer></script>
-    <script src="/js/server.js"></script>
+    <script src="./js/metodoPago.js" defer></script>
 </body>
 </html>
 

@@ -1,7 +1,8 @@
+/* Fondo general */
 body {
     margin: 0;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #004aad, #ffcc00); /* Azul y amarillo */
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -9,20 +10,22 @@ body {
     color: #333;
 }
 
+/* Contenedor principal */
 .dashboard-container {
     background: white;
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    width: 90%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 1000px;
     text-align: center;
     animation: fadeIn 0.8s ease-in-out;
 }
 
+/* Títulos */
 h1 {
     margin-bottom: 10px;
-    color: #222;
+    color: #004aad;
 }
 
 p {
@@ -31,7 +34,7 @@ p {
     color: #555;
 }
 
-/* 🔹 Tabla estilizada */
+/* Tabla */
 .styled-table {
     width: 100%;
     border-collapse: collapse;
@@ -43,7 +46,7 @@ p {
 }
 
 .styled-table thead {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: #004aad;
     color: white;
 }
 
@@ -61,7 +64,38 @@ p {
     transition: 0.3s;
 }
 
-/* 🔹 Botón logout */
+/* Botones */
+.btn {
+    padding: 8px 14px;
+    margin: 3px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+    color: #fff;
+}
+
+/* Botón Editar */
+.btn.editar {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+.btn.editar:hover {
+    background: linear-gradient(135deg, #218838, #28a745);
+    transform: scale(1.05);
+}
+
+/* Botón Eliminar */
+.btn.eliminar {
+    background: linear-gradient(135deg, #ff4b2b, #c82333);
+}
+.btn.eliminar:hover {
+    background: linear-gradient(135deg, #c82333, #ff4b2b);
+    transform: scale(1.05);
+}
+
+/* Botón logout */
 .logout-btn {
     display: inline-block;
     padding: 12px 20px;
@@ -78,13 +112,14 @@ p {
     transform: scale(1.05);
 }
 
-/* 🔹 Mensaje vacío */
+/* Mensaje vacío */
 .empty {
     font-size: 16px;
     color: #777;
     margin: 20px 0;
 }
 
+/* Animación */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }

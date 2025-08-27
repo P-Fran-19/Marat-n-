@@ -5,7 +5,7 @@ body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     color: #fff;
-    background: url('/imagenes/fondo.png') no-repeat center center fixed;
+    background: url('../imagenes/fondo.png') no-repeat center center fixed;
     background-size: cover;
     overflow-x: hidden;
 }
@@ -23,12 +23,43 @@ body::before {
 
 /* Encabezados */
 h1 {
-    text-align: center;
-    font-size: 3.5rem;
-    margin-top: 40px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    animation: fadeInDown 1.2s ease;
+  text-align: center;
+  font-size: 3.5rem;
+  margin-top: 40px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ff4e50, #f9d423, #24c6dc, #ff4e50);
+  background-size: 300%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeInDown 1.2s ease, 
+            gradientMove 6s infinite linear,
+            glowPulse 2s infinite ease-in-out;
+}
+
+/* Animación de entrada */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Gradiente en movimiento */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Pulso de brillo */
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+  50% { text-shadow: 0 0 25px rgba(255,255,255,0.9), 0 0 40px rgba(255,200,100,0.7); }
 }
 
 h2 {
@@ -129,7 +160,7 @@ section {
 /* Galería fotos (aplica sobre lo que ya tenías) */
 #containerFotos {
     margin: 100px auto;
-    width: 80%;
+    width: 100%; 
     height: 450px;
     display: flex;
     justify-content: center;

@@ -1,10 +1,4 @@
-const infoPago = document.getElementById("infoPago");
-let ApretoConfrimar = false;
-if(!ApretoConfrimar){
-  infoPago.style.display = "none";
-}
 // Si ya se confirmó antes, mostrar el QR siempre
-
 // logica de compra de entradas (cantidad y total)
 const PRECIO_POR_ENTRADA = 8000; // precio de cada entrada
 // elementos del DOM (Document Object Model), documentos que están en memoria 
@@ -18,7 +12,7 @@ function totalEntradas(cant, precio = PRECIO_POR_ENTRADA) {
 
 // cuando cambia la cantidad, recalculamos
 function actualizarTotal() {
-  const cant = Number(select.value);        // value llega como string → lo convertimos
+  const cant = Number(select.value); // value llega como string → lo convertimos
   const total = totalEntradas(cant);
   totalEl.textContent = "Total: " + total.toLocaleString("es-AR", {
     style: "currency",
@@ -26,7 +20,7 @@ function actualizarTotal() {
 });
 }
 
-// 1) Llenar el select (tu código)
+// Llenar el select (tu código)
 const cantidad = [1,2,3,4,5,6,7,8,9,10];
 cantidad.forEach(entradas => {
   const option = document.createElement("option");
@@ -35,10 +29,12 @@ cantidad.forEach(entradas => {
   select.appendChild(option);
 });
 
-// 2) Mostrar el total inicial y escuchar cambios
+//Mostrar el total inicial y escuchar cambios
 actualizarTotal();              // muestra el total de la opción inicial
 select.addEventListener("change", actualizarTotal);
 
+// api mercado pago
+/*
 // Pago detras de logica de mercado pago-----
   // Configure sua chave pública do Mercado Pago
   const publicKey = "YOUR_PUBLIC_KEY";
@@ -59,7 +55,7 @@ select.addEventListener("change", actualizarTotal);
   };
 
   renderWalletBrick(bricksBuilder);
-
+*/
 // mayores de 18 años
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
@@ -73,11 +69,26 @@ confirmar.addEventListener("click", (e) => { // lo que hay adentro del parenteci
     const valorNombre = nombre.value;
     const valorApellido = apellido.value;
     const valorEmail = email.value;
+    const cantSeleccionada = Number(select.value);
+    if (disponiblesActuales <= 0) {
+    e.preventDefault();
+    alert("Entradas agotadas, no se puede comprar más");
+    return;
+}
+
+    if (cantSeleccionada > disponiblesActuales) {
+    e.preventDefault();
+    alert(`Solo quedan ${disponiblesActuales} entradas disponibles`);
+    return;
+}
+
+
     if (!valorFecha || !valorNombre || !valorApellido || !valorEmail) {
         e.preventDefault();
         alert("Complete los datos faltantes");
         return;
     }
+    // deberia evitar que se pueda comprar si no hay entradas
 
     // Convertimos la fecha ingresada
     const nacimiento = new Date(valorFecha);
@@ -93,13 +104,44 @@ confirmar.addEventListener("click", (e) => { // lo que hay adentro del parenteci
     if (m < 0 || (m === 0 && fechaReferencia.getDate() < nacimiento.getDate())) {
         edad--;
     }
-
     if (edad < 18) {
         e.preventDefault(); // evita que continúe
         alert("No pueden pasar chicos menores de 18 años.");
     }
-    else {
-        infoPago.style.display = "block";
-        ApretoConfrimar = true;
-    }
 });
+
+// disponibilidad de entradas en la barra 
+let disponiblesActuales = 0;
+
+async function cargarDisponibilidad() {
+    try {
+        const resp = await fetch("./php/disponibles.php");
+        const data = await resp.json();
+
+        disponiblesActuales = data.disponibles; // ← guardamos
+
+        const meter = document.getElementById("disponibilidad");
+        meter.max = data.maximo;
+        meter.value = data.disponibles;
+
+        document.getElementById("textoDisponibles").textContent = 
+            `${data.disponibles} disponibles`;
+
+        if (data.disponibles <= 0) {
+          agotado = true;
+          document.getElementById("confirmar").disabled = true;
+        } else {
+          agotado = false;
+          document.getElementById("confirmar").disabled = false;
+        }
+    } catch (e) {
+        console.error("Error cargando disponibilidad", e);
+    }
+}
+
+
+// Llamada inicial
+cargarDisponibilidad();
+
+// Opcional: refrescar cada 10 segundos
+setInterval(cargarDisponibilidad, 10000);

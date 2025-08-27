@@ -1,26 +1,25 @@
 <?php 
-// dashboard.php (panel oculto protegido)
+// dashboard.php
 session_start();
 if (!isset($_SESSION["autenticado"])) {
     header("Location: login.php");
     exit();
 }
 
-// 🔹 Conexión a la base de datos MySQL
+// Conexión a la BD
 $servername = "localhost";
-$username = "root";   // ⚠️ cámbialo si tu usuario es distinto
-$password = "";       // ⚠️ tu contraseña de MySQL
-$dbname = "entradas"; // ⚠️ nombre de la base de datos
+$username = "root";
+$password = "";
+$dbname = "entradas";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar conexión
 if ($conn->connect_error) {
     die("Error en la conexión: " . $conn->connect_error);
 }
 
-// 🔹 Consulta para traer todos los registros
-$sql = "SELECT nombre, apellido, email, fecha_nacimiento, cantidad FROM compradores";
+// Consulta CORRECTA
+$sql = "SELECT ID, nombre, apellido, email, fechadenacimiento, entradas FROM marathon";
 $result = $conn->query($sql);
 ?> 
 
@@ -28,37 +27,48 @@ $result = $conn->query($sql);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel oculto</title>
-    <link rel="stylesheet" href="/css/BD.css">
+    <title>Fran database</title>
+    <link href="../css/BD.css" rel="stylesheet" >
 </head>
 <body>
     <div class="dashboard-container">
         <h1>Lista de Compradores 🎟️</h1>
         <p>Estos son los registros de entradas vendidas:</p>
 
-        <?php if ($result->num_rows > 0): ?>
+        <?php if ($result && $result->num_rows > 0): ?>
             <table class="styled-table">
                 <thead>
                     <tr>
+                        <th>ID de compra</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Email</th>
                         <th>Fecha de Nacimiento</th>
                         <th>Cantidad de Entradas</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php while($row = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($row['nombre']) ?></td>
-                            <td><?= htmlspecialchars($row['apellido']) ?></td>
-                            <td><?= htmlspecialchars($row['email']) ?></td>
-                            <td><?= htmlspecialchars($row['fecha_nacimiento']) ?></td>
-                            <td><?= htmlspecialchars($row['cantidad']) ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+            <tbody>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['ID']) ?></td>
+                        <td><?= htmlspecialchars($row['nombre']) ?></td>
+                        <td><?= htmlspecialchars($row['apellido']) ?></td>
+                        <td><?= htmlspecialchars($row['email']) ?></td>
+                        <td><?= htmlspecialchars($row['fechadenacimiento']) ?></td>
+                        <td><?= htmlspecialchars($row['entradas']) ?></td>
+                        <td>
+                            <td>
+                                <button class="btn editar" onclick="location.href='editar.php?id=<?= $row['ID'] ?>'">Editar</button>
+                                <button class="btn eliminar" 
+                                onclick="if(confirm('AVISO: Estas por eliminar al registro con ID <?= $row['ID'] ?>. ¿Estás seguro?')) location.href='eliminar.php?id=<?= $row['ID'] ?>'">Eliminar</button>
+                            </td>
+
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+
         <?php else: ?>
             <p class="empty">No hay registros de compradores todavía.</p>
         <?php endif; ?>
