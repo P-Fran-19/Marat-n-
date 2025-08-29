@@ -56,12 +56,12 @@ El sistema contempla tanto la experiencia del usuario (compra de entradas y acce
 
 ## 🔒 Seguridad
 > [!Important]
-- Autenticación requerida para acceder al panel de administración.
-- Utiliza el protocolo https
-- Validaciones estrictas en el formulario de compra:
+> - Autenticación requerida para acceder al panel de administración.
+> - Utiliza el protocolo https
+> - Validaciones estrictas en el formulario de compra:
   - Datos obligatorios
   - Restricción por edad
   - Control de stock disponible
 - Datos de los compradores almacenados en base de datos y gestionados únicamente por administradores autorizados.
->
+
 
