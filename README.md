@@ -63,5 +63,5 @@ El sistema contempla tanto la experiencia del usuario (compra de entradas y acce
   - Restricción por edad
   - Control de stock disponible
 - Datos de los compradores almacenados en base de datos y gestionados únicamente por administradores autorizados.
-
+>
 
