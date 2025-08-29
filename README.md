@@ -39,7 +39,7 @@ El sistema contempla tanto la experiencia del usuario (compra de entradas y acce
 
 ### Integraciones
 - **n8n:** envío automático de correos electrónicos con los datos de compra.
-> [!Waring]
+> [!Warning]
 > - **Mercado Pago (API):** configurada para futura activación del pago automático (actualmente deshabilitada por decisión del cliente).
 
 ---
