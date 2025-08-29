@@ -1,5 +1,4 @@
 # Marathon
-> [!Marathon]
 # 🎭 Cooperativa Teatral EnLasNube - Sistema de Venta de Entradas
 
 Este repositorio contiene el desarrollo de una aplicación web para la **Cooperativa Teatral EnLasNube**, destinada a la gestión y comercialización de entradas de la obra **"Maratón"**.  
@@ -56,7 +55,7 @@ El sistema contempla tanto la experiencia del usuario (compra de entradas y acce
 ---
 
 ## 🔒 Seguridad
-
+> [!Important]
 - Autenticación requerida para acceder al panel de administración.
 - Utiliza el protocolo https
 - Validaciones estrictas en el formulario de compra:
