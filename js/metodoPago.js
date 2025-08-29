@@ -112,10 +112,10 @@ confirmar.addEventListener("click", (e) => { // lo que hay adentro del parenteci
 
 // disponibilidad de entradas en la barra 
 let disponiblesActuales = 0;
-
+// consultar disponibilidad
 async function cargarDisponibilidad() {
     try {
-        const resp = await fetch("./php/disponibles.php");
+        const resp = await fetch("./php/disponibles.php"); // lo enviamos a .php de disponibles
         const data = await resp.json();
 
         disponiblesActuales = data.disponibles; // ← guardamos
@@ -139,6 +139,35 @@ async function cargarDisponibilidad() {
     }
 }
 
+// 2. Guardar compra (nuevo)
+confirmar.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const datosCompra = {
+    nombre: nombre.value,
+    apellido: apellido.value,
+    email: email.value,
+    cantidad: Number(select.value)
+  };
+
+  try {
+    const resp = await fetch("./php/guardarCompra.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datosCompra)
+    });
+
+    const data = await resp.json();
+    if (data.ok) {
+      alert("✅ Compra registrada, revisá tu email");
+      cargarDisponibilidad(); // refresca la barrita
+    } else {
+      alert("❌ Error: " + data.error);
+    }
+  } catch (err) {
+    console.error("Error guardando compra", err);
+  }
+});
 
 // Llamada inicial
 cargarDisponibilidad();
